@@ -1,0 +1,92 @@
+<div class="login-section" style="background-image: url('dist/img/bg.png');">
+  <div class="container">
+    <div class="login-block">
+      <form name="SignupForm">
+        <div class="row-table">
+          <div class="col-cell">
+            <div class="form-block">
+              <div class="logo-block text-center">
+                <div class="logo-heading"><strong>SignUp</strong></div>
+                <div class="logo-heading">Fill Your Details</div>
+              </div>
+              <div class="whitebg-section"> 
+                <div class="row">
+                  <div class="form-group clearfix">
+                    <label class="control-label col-md-12">First Name</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" ng-model="modelFirstName" name="nameFirstName" placeholder="First Name" ng-pattern="/^[a-zA-Z\s]*$/" required>
+                      <span style="color:red;" ng-show="SignupForm.nameFirstName.$dirty && SignupForm.nameFirstName.$invalid">
+                       <span ng-show="SignupForm.nameFirstName.$error.required">First name is required.</span>
+                       <span ng-show="SignupForm.nameFirstName.$error.pattern">Please Enter Alphabets.</span>
+                     </div>
+                   </div>
+                   <div class="form-group clearfix">
+                    <label class="control-label col-md-12">Last Name</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" ng-model="modelLastName" name="nameLastName" placeholder="Last Name" ng-pattern="/^[a-zA-Z\s]*$/" required>
+                      <span style="color:red;" ng-show="SignupForm.nameLastName.$dirty && SignupForm.nameLastName.$invalid">
+                       <span ng-show="SignupForm.nameLastName.$error.required">Last name is required.</span>
+                       <span ng-show="SignupForm.nameLastName.$error.pattern">Please Enter Alphabets.</span>
+                     </div>
+                   </div>
+                   <div class="col-sm-12">
+                   <div class="form-group clearfix">
+                    <label class="control-label col-md-12">Email</label>
+                    <input type="email" class="form-control" name="nameEmail" placeholder="email@email.com" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-model="modelEmail" required>
+                    <span style="color:red;" ng-show="SignupForm.nameEmail.$dirty && SignupForm.nameEmail.$invalid" >
+                     <span ng-show="SignupForm.nameEmail.$error.required">Email is required.</span>
+                     <span ng-show="SignupForm.nameEmail.$error.pattern">Only Valid email !</span>
+                   </div>
+                 </div>
+                 <div class="form-group clearfix">
+                  <label class="control-label col-md-12">Password</label>
+                  <div class="col-sm-12">
+                    <input type="password" class="form-control" ng-model="modelPassword" name="namePassword" placeholder="Password" ng-pattern="/^([a-zA-Z0-9@*#]{8,15})$/" required>
+                      <span style="color:red" ng-if="modelPassword.length < 6 ">weak password</span>
+                     <span style="color:red" ng-if="modelPassword.length > 5 && user.password.length < 10">good password</span>
+                     <span style="color:red" ng-if="modelPassword.length > 9 ">strong password</span>
+           
+                    <span style="color:red;" ng-show="SignupForm.namePassword.$dirty && SignupForm.namePassword.$invalid">
+                     <span ng-show="SignupForm.namePassword.$error.required">Password is required.</span>
+                     <span ng-show="SignupForm.namePassword.$error.pattern">Password Should consist of one symbole atleast one Cappital Letter and Number.</span>
+                     </span>
+                   </div>
+                 </div>
+                 <div class="form-group clearfix">
+                  <label class="control-label col-md-12">Confirm Password</label>
+                  <div class="col-sm-12">
+                    <input type="password" class="form-control" ng-model="modelCpassword" name="nameCpassword"  placeholder="Confirm Password" required>
+
+                    <span style="color:red;" ng-show="SignupForm.nameCpassword.$dirty && SignupForm.nameCpassword.$invalid"></span>             
+
+                     <!-- Some Thing is wrong with Confirm Password -->
+                      <span style="color:red;" ng-if="modelCpassword! = modelPassword && modelCpassword != null">Password not Matched.</span>
+
+                     <!--  <span style="color:red" ng-if="user.pass!= user.password&&user.pass!=null" >Password not matched.</span> -->
+                   </div>
+                 </div>                            
+                   <div class="form-group clearfix">
+                     <label class="control-label col-md-12">UserRole</label>
+                     <div class="col-sm-12">
+                       <select class="form-control" ng-model="modelUserRole">
+                         <option value="">Select Role</option>
+                         <option value="Admin">Admin</option>
+                        <!--  <option value="super_admin">Super Admin</option> -->
+                       </select>
+                     </div>
+                   </div>
+                   <div class="form-group m-t-20 button-block clearfix">
+                    <div class="col-sm-12">
+                      <button type="button" ng-click="signup()" class="btn btn-block btn-blue">Signup</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

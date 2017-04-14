@@ -1,0 +1,156 @@
+
+Previous Modification Made for Sheshnath
+
+
+
+//**********1***********//
+
+//------pandey
+// exports.login = function(req, res){
+// 	 console.log("login"+req.body.Email+"pass"+ req.body.Password);
+// 	UserSchema.findOne({Email:req.body.Email, Password:req.body.Password}, function(err, user_info){
+// 		if(err){
+// 			return res.json({ResponseCode:400, ResponseMessage:"Unexpected error"})
+// 		}else if(!user_info){
+// 			return res.json({ResponseCode:404, ResponseMessage: "Email/Password not correct."})
+// 		}else{
+		
+// 			res.send({ResponseCode: 200, ResponseMessage:"Success",UserId:user_info._id });
+// 		}
+// 	})
+// }
+//-------pandey
+
+//**********1***********//
+
+//**********2***********//
+
+// exports.userSignUp = function(req, res){
+// 	console.log("req body of userSignUp--", JSON.stringify(req.body));
+// 	var userSchema = new UserSchema(req.body);
+// 	userSchema.save(function(err, resultUser){
+// 		if(err){
+// 			res.send({ResponseCode:400, ResponseMessage: "Error"});
+// 			console.log(err);
+// 		}
+// 		else{
+			
+// 			res.send({ResponseCode: 200, ResponseMessage:"Success",UserId:resultUser._id});
+// 		}
+// 	});
+// }
+//**********2E***********//
+
+
+//**********3***********//
+//-----pandye
+// exports.showRoleData = function(req, res){
+// 	UserSchema.findOne({_id:req.body.UserId}).exec(function(err, result){
+// 		if(err){
+// 			res.send({ResponseCode:400, ResponseMessage: "Error"});
+// 			console.log(err);
+// 		}
+// 		else{
+
+// 					//return res.json({ResponseCode:200, FeedList:user_info,ResponseMessage: "Success"});
+// 					if(result.UserRole=='King')
+// 					{
+// 						console.log("user is king ")
+// 						UserSchema.find().where('UserRole').in(['queen','boy','girl']).exec(function(err, user_info){
+// 							if(err){
+// 								res.send({ResponseCode:400, ResponseCode: "Error"});
+// 								console.log(err);
+// 							}
+// 							else{
+// 								return res.json({ResponseCode:200, FeedList:user_info,ResponseMessage: "Success"});
+// 							}
+// 						})
+// 					}
+// 					else if (result.UserRole=='Queen')
+// 					{
+// 						console.log("user is queen")
+// 						UserSchema.find().where('UserRole').equals('girl').exec(function(err, user_info){
+// 							if(err){
+// 								res.send({ResponseCode:400, ResponseMessage: "Error"});
+// 								console.log(err);
+// 							}else{
+// 								return res.json({ResponseCode:200, FeedList:user_info,ResponseMessage: "Success"});
+// 							}
+// 						})
+// 					}
+// 					else if (result.UserRole=='Boy')
+// 					{
+// 						console.log("user is boy")
+// 						UserSchema.find().where('UserRole').equals('king').exec(function(err, user_info){
+// 							if(err){
+// 								res.send({ResponseCode:400, ResponseMessage: "Error"});
+// 								console.log(err);
+// 							}else{
+// 								return res.json({ResponseCode:200, FeedList:user_info,ResponseMessage: "Success"});
+// 							}
+// 						})
+// 					}
+// 					else if (result.UserRole=='Girl')
+// 					{
+// 						console.log("user is girl")
+// 						UserSchema.find().where('UserRole').equals('boy').exec(function(err, user_info){
+// 							if(err){
+// 								res.send({ResponseCode:400, ResponseMessage: "Error"});
+// 								console.log(err);
+// 							}else{
+// 								return res.json({ResponseCode:200, FeedList:user_info,ResponseMessage: "Success"});
+// 							}
+// 						})
+// 					}
+
+// 				}
+// 		})
+
+
+// }
+//-----pandey
+//**********3E***********//
+
+//**********4***********//
+//***********Pandey
+// exports.createProfile = function(req, res){
+//  	console.log("req body of createProfile" + JSON.stringify(req.body));
+
+//  		//update FEED
+//  	 	UserSchema.findOneAndUpdate({_id:req.body._id},req.body,{new:true}, function(err, updateResult){
+//  		if(err){
+// 			res.send({ResponseCode:400, ResponseMessage: "Error"});
+// 			console.log(err);
+// 		}else{
+// 			console.log("success-3");	
+// 		    res.send({ResponseCode:200, ResponseMessage: "Success"});
+// 		}
+//  	})
+
+
+//  }
+
+//-------Pandey
+//**********4E***********//
+
+
+	var update = {};
+	for (var key in req.body){
+		update[key] = req.body[key];
+		console.log("update", update);
+		key = key;
+	}
+	console.log("key", key);
+	console.log("update", update);
+	User.findOneAndUpdate({email:req.params.email}, {$set:update}, {new:true}, function(err, data){
+		if(err){
+			return res.json({code:400, message:err});
+		}
+		else if(!req.body){
+			return res.json({code:400, message:'Please enter all the fields'});
+		}
+		else{
+			return res.json({code:202, message:'Profile updated successfully.'});
+		}
+	
+
