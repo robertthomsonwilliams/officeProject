@@ -11,7 +11,7 @@ DeviceName:{type:String},
 
 DeviceId:{type:String,required:true,unique:true} ,
 
-RecieveNotification:{type:Boolean},
+RecieveNotification:{type:Boolean,default:true},
 
 Password:{type:String},
 

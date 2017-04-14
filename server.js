@@ -85,9 +85,9 @@ app.post('/push/Login',user_action.pushLogin);//done
 app.post('/push/getAll',user_action.pushgetAll);//done
 app.post('/push/showUserDetails',user_action.pushshowUserDetails);//done
 
-app.post('/push/pushsendMessage',user_action.pushsendMessage);//done
-app.post('/push/pushrecieveNotification',user_action.pushrecieveNotification);//done
-app.post('/push/pushdeleteDevices',user_action.pushdeleteDevices);//done
+app.post('/push/sendMessage',user_action.pushsendMessage);//done
+app.post('/push/recieveNotification',user_action.pushrecieveNotification);//done
+app.post('/push/deleteDevice',user_action.pushdeleteDevices);//done
 
 
 

@@ -770,14 +770,14 @@ exports.pushgetAll = function(req, res){
  	if(!_id){
  		return res.json({ResponseCode:400, ResponseMessage: "UserId is missing."})
  	}
- 	UserSchema
+ 	DeviceSchema
  	.findOne({_id:_id})
  	.exec(function(err, user_info){
  		if(err){
  			res.send({ResponseCode:400, ResponseMessage: "Error"});
  			console.log(err);
  		}else{
- 			return res.json({ResponseCode:200, FeedList:user_info,ResponseMessage: "Success"});
+ 			return res.json({ResponseCode:200, List:user_info,ResponseMessage: "Success"});
  		}
  	})
  }
@@ -787,10 +787,12 @@ exports.pushsendMessage = function(req, res){
 
 		var message = new gcm.Message({data: {message: req.body.Message}});
 		var regTokens = [req.body.RegistrationId];
-		var sender = new gcm.Sender("ghjdhbsijd");
+		var sender = new gcm.Sender("ENTER GCM API KEY");
 
 
 		//save the message details in the schema sendMessageArray
+
+		//uncomment after you get the API key from GCM
 
 		// sender.send(message, { registrationTokens: regTokens }, function (err, response) {
 
@@ -807,7 +809,7 @@ exports.pushsendMessage = function(req, res){
 
 			 console.log("req.body.FromRegistrationId"+req.body.FromRegistrationId +"req.body.ToRegistrationId :" +req.body.ToRegistrationId)
 
-			DeviceSchema.findOneAndUpdate({_id:req.body.FromRegistrationId},{$push:{sendMessageDetails:{RegisteredID:req.body.ToRegistrationId}}},{new:true}, function(err, result){
+			DeviceSchema.findOneAndUpdate({_id:req.body.FromRegistrationId},{$push:{SendMessageDetails:{RegisteredID:req.body.ToRegistrationId,Message:req.body.Message}}},{new:true}, function(err, result){
 			
 			if(err){
 			res.send({code:400, message: "Error"});
@@ -831,16 +833,18 @@ exports.pushsendMessage = function(req, res){
  exports.pushrecieveNotification = function(req, res){
 
 
-	var _id = req.body.RegisteredId;
+	var _id = req.body.RegistrationId;
+
+	console.log("req.body.RegistrationId "+req.body.RegistrationId)
 	if(!_id){
-		res.send({ResponseCode:400, ResponseMessage: "UserId is missing."})
+		res.send({ResponseCode:400, ResponseMessage: "RegistrationId is missing."})
 	}	
-	DeviceSchema.findOneAndUpdate({_id:_id},{$set:{recieveNotification:false}},{new:true}, function(err, updateResult){
+	DeviceSchema.findOneAndUpdate({_id:_id},{$set:{RecieveNotification:false}},{new:true}, function(err, updateResult){
 		if(err){
 			res.send({ResponseCode:400, ResponseMessage: "Interal Server Error."});
 			console.log(err);
 		}else{
-			 res.send({ResponseCode:200, ResponseMessage:"Notification facility disabled"});
+			 res.send({ResponseCode:200, ResponseMessage:"Notification facility disabled",updateResult:updateResult});
 		}
 	})	
 
